@@ -6,15 +6,20 @@ LDFLAGS = -Wall
 
 RM = rm
 
-OBJS = token.o main.o
-
+OBJS = token.o stack.o main.o
+PROG = chimi
 all: chimi
 
-chimi: $(OBJS)
+ctest: clean test
+
+clean:
+	$(RM) -f $(PROG) $(OBJS)
+
+test: all
+	./$(PROG)
+
+$(PROG): $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o chimi
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
-
-clean:
-	$(RM) chimi $(OBJS)
