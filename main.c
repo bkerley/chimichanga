@@ -20,7 +20,7 @@ void repl() {
 			return;
 		}
 		toks = token_parse(line);
-		
+		printf("%d toks\n", toks->count);
 		free(toks);
 		free(line);
 	}
