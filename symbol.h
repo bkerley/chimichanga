@@ -5,6 +5,7 @@
 
 typedef struct {
 	token symbol;
+	void (*cdispatch)();
 } interned_symbol;
 
 stack_entry symbol_intern(token word);
