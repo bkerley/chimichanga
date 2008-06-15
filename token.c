@@ -35,9 +35,9 @@ token_trans transition(token_state prev, token_state cur) {
 		case TOKEN:
 			switch (cur) {
 				case WHITESPACE:
-					return SPCSPC;
+					return TOKSPC;
 				case TOKEN:
-					return SPCTOK;
+					return TOKTOK;
 			}
 	}
 	return SPCSPC;
