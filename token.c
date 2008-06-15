@@ -93,6 +93,11 @@ void insert_toks(char* line, token_array* toks) {
 		
 		prev_state = cur_state;
 	}
+	if (cur_state == TOKEN) {
+		tok_len = i - start;
+		toks->body[cur_tok] = calloc(tok_len + 1, sizeof(char));
+		memcpy(toks->body[cur_tok], line + start, tok_len);
+	}
 }
 
 token_array* token_parse(char* line) {

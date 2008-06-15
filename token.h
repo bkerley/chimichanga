@@ -1,5 +1,6 @@
 #ifndef CHIMI_TOKEN_H
 #define CHIMI_TOKEN_H
+#include <unistd.h>
 typedef char* token;
 
 typedef struct {
