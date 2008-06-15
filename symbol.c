@@ -53,7 +53,7 @@ interned_symbol* fetch_word(token word) {
 }
 
 stack_entry symbol_intern(token word) {
-	interned_symbol* sym = fetch_word(word);
+	interned_symbol* sym = fetch_word(word+1);
 	return (stack_entry)sym;
 }
 
