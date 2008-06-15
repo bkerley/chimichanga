@@ -1,0 +1,17 @@
+dispatch "+"
+{
+	long a,b,r;
+	a = (long)stack_pop();
+	b = (long)stack_pop();
+	r = a + b;
+	stack_push((stack_entry)r);
+}
+
+dispatch "*"
+{
+	long a,b,r;
+	a = popl;
+	b = popl;
+	r = a * b;
+	push(r);
+}
