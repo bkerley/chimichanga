@@ -15,9 +15,7 @@ typedef struct {
 stack_header* get_stack() {
 	static stack_header* current_stack = NULL;
 	
-	if (current_stack) {
-		return current_stack;
-	}
+	if (current_stack) return current_stack;
 	
 	current_stack = calloc(1, sizeof(stack_header));
 	current_stack->maxsize = STACK_SIZE;
@@ -28,6 +26,7 @@ stack_header* get_stack() {
 	if (!current_stack->bottom) {
 		fprintf(stderr,
 			"Failed to alloc stack size of %ld (%s:%d)\n", STACK_SIZE, __FILE__, __LINE__);
+		exit(-1);
 	}
 	return current_stack;
 }
@@ -45,6 +44,7 @@ void double_stack(stack_header* stk) {
 	if (!trial) {
 		fprintf(stderr,
 			"Failed to double stack size to %ld (%s:%d)\n", stk->maxsize*2, __FILE__, __LINE__);
+		exit(-1);
 	}
 	
 	memcpy(trial, stk->bottom, stk->maxsize);
