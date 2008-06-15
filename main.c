@@ -3,6 +3,7 @@
 #include <readline/readline.h>
 #include "stack.h"
 #include "token.h"
+#include "eval.h"
 
 void repl() {
 	char* line;
