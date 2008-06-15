@@ -4,6 +4,7 @@
 #include "stack.h"
 #include "token.h"
 #include "eval.h"
+#include "init.h"
 
 void repl() {
 	char* line;
@@ -24,6 +25,7 @@ void repl() {
 
 int main() {
 	fprintf(stderr, "chimichanga!\n");
+	init_register();
 	repl();
 	return 0;
 }
