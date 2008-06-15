@@ -100,7 +100,7 @@ token_array* token_parse(char* line) {
 	toks = calloc(1, sizeof(token_array));
 	toks->count = count_token(line);
 	toks->body = calloc(toks->count, sizeof(token));
-	
+	insert_toks(line, toks);
 	
 	return toks;
 }
