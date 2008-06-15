@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -g
 
 LD = gcc
-LDFLAGS = -Wall
+LDFLAGS = -Wall -lreadline
 
 RM = rm
 
