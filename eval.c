@@ -22,8 +22,7 @@ void eval(token_array* line) {
 				stack_push((stack_entry)strtol(cur_word, NULL, 0));
 				break;
 			case OPCODE:
-				fprintf(stderr,
-					"Should be executing %s right now (%s:%d)\n", cur_word, __FILE__, __LINE__);
+				symbol_dispatch(cur_word);
 				break;
 		}
 	}
