@@ -4,12 +4,6 @@
 #include "stack.h"
 #include "token.h"
 
-int main() {
-	fprintf(stderr, "chimichanga!\n");
-	repl();
-	return 0;
-}
-
 void repl() {
 	char* line;
 	token_array* toks;
@@ -20,8 +14,16 @@ void repl() {
 			return;
 		}
 		toks = token_parse(line);
-		printf("%d toks\n", toks->count);
+		printf("%ld toks\n", toks->count);
+		eval(toks);
 		token_free(toks);
 		free(line);
 	}
 }
+
+int main() {
+	fprintf(stderr, "chimichanga!\n");
+	repl();
+	return 0;
+}
+
