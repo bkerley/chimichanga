@@ -5,11 +5,8 @@
 #include "token.h"
 
 int main() {
-	stack_entry canary;
 	fprintf(stderr, "chimichanga!\n");
-	stack_push('8');
-	canary = stack_pop();
-	fprintf(stderr, "canary %s\n",canary=='8'?"matches":"doesn't match");
+	repl();
 	return 0;
 }
 
@@ -18,9 +15,13 @@ void repl() {
 	token_array* toks;
 	while(1) {
 		line = readline("chimi> ");
+		if (!line) {
+			fprintf(stderr, "\nEOF in repl (%s:%d)\n", __FILE__, __LINE__);
+			return;
+		}
 		toks = token_parse(line);
 		
-		
+		free(toks);
 		free(line);
 	}
 }
