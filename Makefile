@@ -6,14 +6,16 @@ LDFLAGS = -Wall -lreadline
 
 RM = rm
 
-OBJS = token.o stack.o main.o class.o eval.o symbol.o
+PRE2C = ruby pre2c.rb
+
+OBJS = token.o stack.o main.o class.o eval.o symbol.o init.o
 PROG = chimi
 all: chimi
 
 ctest: clean test
 
 clean:
-	$(RM) -f $(PROG) $(OBJS)
+	$(RM) -f $(PROG) $(OBJS) init.c
 
 test: all
 	./$(PROG)
@@ -23,3 +25,6 @@ $(PROG): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
+
+init.c: init.pre
+	$(PRE2C) $<
