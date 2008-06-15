@@ -1,3 +1,5 @@
+#include "init.h"
+
 dispatch "+"
 {
 	long a,b,r;
@@ -14,4 +16,11 @@ dispatch "*"
 	b = popl;
 	r = a * b;
 	push(r);
+}
+
+dispatch "pop"
+{
+	long a;
+	a = popl;
+	printf("%ld\n",a);
 }
