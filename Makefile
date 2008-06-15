@@ -6,7 +6,7 @@ LDFLAGS = -Wall -lreadline
 
 RM = rm
 
-OBJS = token.o stack.o main.o
+OBJS = token.o stack.o main.o class.o eval.o symbol.o
 PROG = chimi
 all: chimi
 
