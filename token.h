@@ -8,4 +8,5 @@ typedef struct {
 	} token_array;
 
 	token_array* token_parse(char* line);
+	void token_free(token_array*);
 #endif

@@ -104,3 +104,12 @@ token_array* token_parse(char* line) {
 	
 	return toks;
 }
+
+void token_free(token_array* toks) {
+	size_t i;
+	for(i = 0; i < toks->count; i++) {
+		free(toks->body[i]);
+	}
+	free(toks->body);
+	free(toks);
+}
