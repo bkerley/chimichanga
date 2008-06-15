@@ -1,18 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "symbol.h"
 
-token symbol_to_opcode(token symbol) {
-	if (symbol[0] != ':') {
-		fprintf(stderr,
-			"Tried to de-symbol a non-symbol %s (%s:%d)", symbol, __FILE__, __LINE__);
-		exit(-1);
-	}
-	return symbol + 1;
-}
-
 typedef struct _symbol_dictionary {
-	token current;
+	interned_symbol* current;
 	struct _symbol_dictionary* left;
 	struct _symbol_dictionary* right;
 } symbol_dictionary;
@@ -26,14 +18,46 @@ symbol_dictionary* get_dict() {
 	return dict;
 }
 
-symbol_dictionary* traverse_word(token word) {
-	
+symbol_dictionary* candidate_check(symbol_dictionary* candidate) {
+	if (!candidate) {
+		return calloc(1, sizeof(symbol_dictionary));
+	}
+	return candidate;
+}
+
+interned_symbol* fetch_word(token word) {
+	int comparison;
+	symbol_dictionary* tree = get_dict();
+	while(1) {
+		if (!tree->current) {
+			tree->current = calloc(1, sizeof(interned_symbol));
+			tree->current->symbol = strdup(word);
+			return tree->current;
+		}
+		
+		comparison = strcmp(word, tree->current->symbol);
+		
+		if (comparison > 0) {
+			tree->left = candidate_check(tree->left);
+			tree = tree->left;
+		}
+		else if (comparison < 0) {
+			tree->right = candidate_check(tree->right);
+			tree = tree->right;
+		}
+		else {
+			return tree->current;
+		}
+		
+	}
 }
 
 stack_entry symbol_intern(token word) {
-	
+	interned_symbol* sym = fetch_word(word);
+	return (stack_entry)sym;
 }
 
-token symbol_extern(stack_entry intern) {
-	
+interned_symbol* symbol_extern(stack_entry intern) {
+	interned_symbol* sym = (interned_symbol*)intern;
+	return sym;
 }

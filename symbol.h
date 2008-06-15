@@ -3,9 +3,11 @@
 #include "stack.h"
 #include "token.h"
 
-stack_entry symbol_intern(token word);
-token symbol_extern(stack_entry intern);
+typedef struct {
+	token symbol;
+} interned_symbol;
 
-token symbol_to_opcode(token word);
+stack_entry symbol_intern(token word);
+interned_symbol* symbol_extern(stack_entry intern);
 
 #endif
