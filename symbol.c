@@ -61,3 +61,18 @@ interned_symbol* symbol_extern(stack_entry intern) {
 	interned_symbol* sym = (interned_symbol*)intern;
 	return sym;
 }
+
+void symbol_cbind(token word, void (*cdispatch)()) {
+	interned_symbol* sym = fetch_word(word);
+	sym->cdispatch = cdispatch;
+}
+
+void symbol_dispatch(token word) {
+	interned_symbol* sym = fetch_word(word);
+	if (!(sym->cdispatch)) {
+		fprintf(stderr,
+			"Tried to dispatch to symbol %s without a proc. (%s:%d)\n",word, __FILE__, __LINE__);
+		exit(-1);
+	}
+	sym->cdispatch();
+}

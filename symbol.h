@@ -11,4 +11,8 @@ typedef struct {
 stack_entry symbol_intern(token word);
 interned_symbol* symbol_extern(stack_entry intern);
 
+void symbol_cbind(token word, void (*cdispatch)());
+
+void symbol_dispatch(token word);
+
 #endif
