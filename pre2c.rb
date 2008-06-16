@@ -11,7 +11,7 @@ infile.each_line do |l|
 		names[$1] = s
 		o = "void #{s}()"
 	end
-	o = o.gsub(/popl/,"(long)stack_pop()")
+	o = o.gsub(/popl()/,"(long)stack_pop()")
 	o = o.gsub(/\Wpush\(/,"stack_push((stack_entry)")
 	outfile.puts o
 end

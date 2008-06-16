@@ -12,8 +12,8 @@ dispatch "+"
 dispatch "*"
 {
 	long a,b,r;
-	a = popl;
-	b = popl;
+	a = popl();
+	b = popl();
 	r = a * b;
 	push(r);
 }
@@ -21,8 +21,8 @@ dispatch "*"
 dispatch "-"
 {
 	long a,b,r;
-	a = popl;
-	b = popl;
+	a = popl();
+	b = popl();
 	r = b - a;
 	push(r);
 }
@@ -30,22 +30,31 @@ dispatch "-"
 dispatch "/"
 {
 	long a,b,r;
-	a = popl;
-	b = popl;
+	a = popl();
+	b = popl();
 	r = b / a;
 	push(r);
+}
+
+dispatch "x"
+{
+	long a,b;
+	a = popl();
+	b = popl();
+	push(a);
+	push(b);
 }
 
 dispatch "pop"
 {
 	long a;
-	a = popl;
+	a = popl();
 	printf("%ld\n",a);
 }
 
 dispatch "pop.x"
 {
 	long a;
-	a = popl;
+	a = popl();
 	printf("0x%lx\n",a);
 }
