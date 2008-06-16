@@ -4,17 +4,16 @@ outfile = File.open(ARGV[0].gsub(/pre$/,'c'),'w')
 names = {}
 outfile.puts '#include "symbol.h"'
 
-infile.each_line do |l|
-	o = l
+infile.each_line do |o|
 	
-	if l =~ /^dispatch \"(.+)\"$/
+	if o =~ /^dispatch \"(.+)\"$/
 		s = ""
 		$1.hash.to_s.each_byte {|b| s << (b+0x16).chr}
 		names[$1] = s
 		o = "void #{s}()"
 	end
 	
-	if l =~ /binop\((.+)\);$/
+	if o =~ /binop\((.+)\);$/
 		op = $1
 		o = <<EOF
 	long a,b,r;
