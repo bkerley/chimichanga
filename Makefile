@@ -10,7 +10,12 @@ PRE2C = ruby pre2c.rb
 
 OBJS = token.o stack.o main.o class.o eval.o symbol.o init.o
 PROG = chimi
-all: chimi
+
+MARKDOWN = Markdown.pl
+
+all: $(PROG)
+
+doc: README.html
 
 ctest: clean test
 
@@ -28,3 +33,6 @@ $(PROG): $(OBJS)
 
 init.c: init.pre
 	$(PRE2C) $<
+
+README.html: README
+	$(MARKDOWN) $< > README.html
