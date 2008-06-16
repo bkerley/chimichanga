@@ -3,10 +3,10 @@
 dispatch "+"
 {
 	long a,b,r;
-	a = (long)stack_pop();
+	a = (long)stack_pop(); // popl() turns into this
 	b = (long)stack_pop();
 	r = a + b;
-	stack_push((stack_entry)r);
+	stack_push((stack_entry)r); // push(r) turns into this
 }
 
 dispatch "*"
@@ -34,6 +34,11 @@ dispatch "/"
 	b = popl();
 	r = b / a;
 	push(r);
+}
+
+dispatch "%"
+{
+	binop(b % a);
 }
 
 dispatch "x"
