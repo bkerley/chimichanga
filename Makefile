@@ -18,7 +18,7 @@ clean:
 	$(RM) -f $(PROG) $(OBJS) init.c
 
 test: all
-	./$(PROG)
+	cat test.in | ./$(PROG) 2> /dev/null | diff test.out -
 
 $(PROG): $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o chimi

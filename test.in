@@ -1,0 +1,7 @@
+3 4 + pop
+4 3 - pop
+3 4 * pop.x
+4 2 / pop.x
+4 2 % pop.x
+4 1 << pop
+8 1 >> pop
