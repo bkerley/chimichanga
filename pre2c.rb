@@ -3,14 +3,17 @@ outfile = File.open(ARGV[0].gsub(/pre$/,'c'),'w')
 
 names = {}
 outfile.puts '#include "symbol.h"'
+
 infile.each_line do |l|
 	o = l
+	
 	if l =~ /^dispatch \"(.+)\"$/
 		s = ""
 		$1.hash.to_s.each_byte {|b| s << (b+0x16).chr}
 		names[$1] = s
 		o = "void #{s}()"
 	end
+	
 	if l =~ /binop\((.+)\);$/
 		op = $1
 		o = <<EOF
@@ -21,10 +24,12 @@ EOF
 		o << "\tr = " << op << ";\n"
 		o << "\tpush(r);\n"
 	end
+	
 	o = o.gsub(/popl\(\)/,"(long)stack_pop()")
 	o = o.gsub(/\Wpush\(/,"\tstack_push((stack_entry)")
 	outfile.puts o
 end
+
 outfile.puts "void init_register() {"
 names.each do |k,v|
 	outfile.puts "\tsymbol_cbind(\"#{k}\", *#{v});"
