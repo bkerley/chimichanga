@@ -18,9 +18,34 @@ dispatch "*"
 	push(r);
 }
 
+dispatch "-"
+{
+	long a,b,r;
+	a = popl;
+	b = popl;
+	r = b - a;
+	push(r);
+}
+
+dispatch "/"
+{
+	long a,b,r;
+	a = popl;
+	b = popl;
+	r = b / a;
+	push(r);
+}
+
 dispatch "pop"
 {
 	long a;
 	a = popl;
 	printf("%ld\n",a);
+}
+
+dispatch "pop.x"
+{
+	long a;
+	a = popl;
+	printf("0x%lx\n",a);
 }
