@@ -11,13 +11,23 @@ infile.each_line do |l|
 		names[$1] = s
 		o = "void #{s}()"
 	end
-	o = o.gsub(/popl()/,"(long)stack_pop()")
-	o = o.gsub(/\Wpush\(/,"stack_push((stack_entry)")
+	if l =~ /binop\((.+)\);$/
+		op = $1
+		o = <<EOF
+	long a,b,r;
+	a = popl();
+	b = popl();
+EOF
+		o << "\tr = " << op << ";\n"
+		o << "\tpush(r);\n"
+	end
+	o = o.gsub(/popl\(\)/,"(long)stack_pop()")
+	o = o.gsub(/\Wpush\(/,"\tstack_push((stack_entry)")
 	outfile.puts o
 end
 outfile.puts "void init_register() {"
 names.each do |k,v|
-	outfile.puts "symbol_cbind(\"#{k}\", *#{v});"
+	outfile.puts "\tsymbol_cbind(\"#{k}\", *#{v});"
 end
 outfile.puts "}"
 outfile.close
