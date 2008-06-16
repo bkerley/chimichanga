@@ -1,2 +1,3 @@
 chimi
 *.o
+init.c
