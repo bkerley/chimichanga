@@ -1,0 +1,35 @@
+Welcome to Chimichanga
+======================
+
+Chimichanga is a crummy stack based language I wrote because I was
+tired and bored after moving stuff and shopping in my sweet new
+apartment in Miami.
+
+What are pre2c.rb and init.pre?
+-------------------------------
+
+I wanted a nice way to add procs that required a bit more intuition
+than I know how to get out of the C preprocessor, and that also made
+the finished C easy to inspect.
+
+pre2c basically tallies up the dispatch calls, translates the names
+into valid C function names, and sticks them all in a function at the
+end that's called at startup to load up the procs into the symbol
+dictionary.
+
+It also does macro replacement, mostly to make binary operations nice
+and short.
+
+Who do I complain to?
+---------------------
+
+Nominally, you can complain to bkerley@brycekerley.net
+
+In practice, it's your own fault for using chimichnga instead of one
+of these completely fine alternatives (listed in reverse alphabetical
+order):
+
+* Postscript (or Ghostscript)
+* Forth
+* Factor
+
