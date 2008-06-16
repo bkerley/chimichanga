@@ -5,3 +5,4 @@
 4 2 % pop.x
 4 1 << pop
 8 1 >> pop
+0x20 2 >> pop
