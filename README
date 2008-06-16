@@ -16,16 +16,16 @@ You need these packages:
 * ruby - tested with ruby 1.8.6 (2007-09-23 patchlevel 110) [i686-darwin9.0.0]
 * diff - tested with GNU diffutils 2.8.1
 
-Once you have those, you should be able to run 'make' and get the
-'chimi' binary.  If not, you might have to point your environment
-variables or the Makefile at the proper include and library
+Once you have those, you should be able to run `make` and get the
+`chimi` binary.  If not, you might have to point your environment
+variables or the `Makefile` at the proper include and library
 directories.
 
 You mean you don't have an autoconf set up?
 -------------------------------------------
 
 Right.  I respect your time too much to make you wait through a
-minute of autoconf testing for working fprintf() and strtol()
+minute of autoconf testing for working `fprintf()` and `strtol()`
 implementations.  Running `make test` will tell you if something's
 broken.  If it doesn't, please email me the test case.
 
@@ -36,7 +36,7 @@ I wanted a nice way to add procs that required a bit more intuition
 than I know how to get out of the C preprocessor, and that also made
 the finished C easy to inspect.
 
-pre2c basically tallies up the dispatch calls, translates the names
+`pre2c` basically tallies up the dispatch calls, translates the names
 into valid C function names, and sticks them all in a function at the
 end that's called at startup to load up the procs into the symbol
 dictionary.
@@ -53,9 +53,9 @@ finding the failed one easier.
 Who do I complain to?
 ---------------------
 
-Nominally, you can complain to bkerley@brycekerley.net
+Nominally, you can complain to <bkerley@brycekerley.net>
 
-In practice, it's your own fault for using chimichnga instead of one
+Practically, it's your own fault for using chimichnga instead of one
 of these completely fine alternatives (listed in reverse alphabetical
 order):
 
