@@ -11,7 +11,7 @@ dispatch "+"
 
 dispatch "*"
 {
-	long a,b,r;
+	long a,b,r; // binop(a * b) turns into this whole function
 	a = popl();
 	b = popl();
 	r = a * b;
@@ -20,20 +20,12 @@ dispatch "*"
 
 dispatch "-"
 {
-	long a,b,r;
-	a = popl();
-	b = popl();
-	r = b - a;
-	push(r);
+	binop(b - a);
 }
 
 dispatch "/"
 {
-	long a,b,r;
-	a = popl();
-	b = popl();
-	r = b / a;
-	push(r);
+	binop(b / a);
 }
 
 dispatch "%"
