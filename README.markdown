@@ -1,9 +1,8 @@
 Welcome to Chimichanga
 ======================
 
-Chimichanga is a crummy stack based language I wrote because I was
-tired and bored after moving stuff and shopping in my sweet new
-apartment in Miami.
+Chimichanga is a crummy stack based language.  Right now it's
+broken to require x86\_64 while I play with bytecode.
 
 How do I compile this?
 ----------------------
