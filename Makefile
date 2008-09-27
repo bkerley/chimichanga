@@ -4,6 +4,9 @@ CFLAGS = -Wall -g -arch x86_64
 LD = gcc
 LDFLAGS = -Wall -lreadline -arch x86_64
 
+CT = gcc
+CTFLAGS = -S -arch x86_64
+
 RM = rm
 
 PRE2C = ruby pre2c.rb
@@ -30,6 +33,9 @@ $(PROG): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
+
+%.s: %.c
+	$(CT) $(CTFLAGS) -c $<
 
 init.c: init.pre
 	$(PRE2C) $<
