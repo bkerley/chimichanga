@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -arch x86_64
 
 LD = gcc
-LDFLAGS = -Wall -lreadline
+LDFLAGS = -Wall -lreadline -arch x86_64
 
 RM = rm
 
