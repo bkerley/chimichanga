@@ -1,17 +1,16 @@
 #include "init.h"
+#include "symbol.h"
+#define NT "\n\t"
+#define ASM_POP_TWO "xor	%%rax, %%rax" NT "call	_stack_pop" NT "push	%%rax" NT "xor	%%rax, %%rax" NT "call	_stack_pop" NT "pop	%%rbx" NT
+#define ASM_PUSH_RDI "call	_stack_push" NT
 
 dispatch "+"
 {
 	asm (
-		"xor	%%rax, %%rax\n\t"
-		"call	_stack_pop\n\t"
-		"push	%%rax\n\t"
-		"xor	%%rax, %%rax\n\t"
-		"call	_stack_pop\n\t"
-		"pop	%%rbx\n\t"
+		ASM_POP_TWO
 		"add	%%rax, %%rbx\n\t"
 		"mov	%%rbx, %%rdi\n\t"
-		"call	_stack_push\n\t"
+		ASM_PUSH_RDI
 		: /* no output */
 		: /* no input */
 		: "%rax", "%rbx", "%rdi"
@@ -20,16 +19,28 @@ dispatch "+"
 
 dispatch "*"
 {
-	long a,b,r; // binop(a * b) turns into this whole function
-	a = popl();
-	b = popl();
-	r = a * b;
-	push(r);
+	asm(
+		ASM_POP_TWO
+		"mul	%%rbx" NT
+		"mov	%%rax, %%rdi" NT
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi"
+	);
 }
 
 dispatch "-"
 {
-	binop(b - a);
+	asm (
+		ASM_POP_TWO
+		"sub	%%rbx, %%rax\n\t"
+		"mov	%%rax, %%rdi\n\t"
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi"
+	);
 }
 
 dispatch "/"
