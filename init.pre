@@ -6,10 +6,10 @@ dispatch "+"
 	a = (long)stack_pop(); // popl() turns into this
 	b = (long)stack_pop();
 	asm (
-	"addq %%rax, %%rbx"
-	: "=b"(r)
-	: "a"(a), "b"(b)
-    );
+		"addq	%%rax, %%rbx"
+		: "=b"(r)
+		: "a"(a), "b"(b)
+	);
 	stack_push((stack_entry)r); // push(r) turns into this
 }
 
