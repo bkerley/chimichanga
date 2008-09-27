@@ -2,15 +2,20 @@
 
 dispatch "+"
 {
-	long a,b,r;
-	a = (long)stack_pop(); // popl() turns into this
-	b = (long)stack_pop();
 	asm (
-		"addq	%%rax, %%rbx"
-		: "=b"(r)
-		: "a"(a), "b"(b)
+		"xor	%%rax, %%rax\n\t"
+		"call	_stack_pop\n\t"
+		"push	%%rax\n\t"
+		"xor	%%rax, %%rax\n\t"
+		"call	_stack_pop\n\t"
+		"pop	%%rbx\n\t"
+		"add	%%rax, %%rbx\n\t"
+		"mov	%%rbx, %%rdi\n\t"
+		"call	_stack_push\n\t"
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi"
 	);
-	stack_push((stack_entry)r); // push(r) turns into this
 }
 
 dispatch "*"
