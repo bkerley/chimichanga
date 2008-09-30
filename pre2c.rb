@@ -2,8 +2,6 @@ infile = File.open(ARGV[0],'r')
 outfile = File.open(ARGV[0].gsub(/pre$/,'c'),'w')
 
 names = {}
-outfile.puts '#include "symbol.h"'
-outfile.puts '#define NT "\n\t"'
 
 infile.each_line do |o|
 	
