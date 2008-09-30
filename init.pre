@@ -1,7 +1,7 @@
 #include "init.h"
 #include "symbol.h"
 #define NT "\n\t"
-#define ASM_POP_TWO "xor	%%rax, %%rax" NT "call	_stack_pop" NT "push	%%rax" NT "xor	%%rax, %%rax" NT "call	_stack_pop" NT "pop	%%rbx" NT
+#define ASM_POP_TWO "call	_stack_pop" NT "push	%%rax" NT "call	_stack_pop" NT "pop	%%rbx" NT
 #define ASM_PUSH_RDI "call	_stack_push" NT
 
 dispatch "+"
