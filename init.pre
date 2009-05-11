@@ -45,12 +45,28 @@ dispatch "-"
 
 dispatch "/"
 {
-	binop(b / a);
+  asm (
+		ASM_POP_TWO
+		"div	%%rbx\n\t"
+		"mov	%%rax, %%rdi\n\t"
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi", "%rdx"
+	);
 }
 
 dispatch "%"
 {
-	binop(b % a);
+  asm (
+		ASM_POP_TWO
+		"div	%%rbx\n\t"
+		"mov	%%rdx, %%rdi\n\t"
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi", "%rdx"
+	);
 }
 
 dispatch "<<"
