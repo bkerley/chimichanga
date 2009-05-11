@@ -71,12 +71,30 @@ dispatch "%"
 
 dispatch "<<"
 {
-	binop(b << a);
+  asm (
+		ASM_POP_TWO
+    "mov  %%rbx, %%rcx\n\t"
+		"sal	%%cl, %%rax\n\t"
+		"mov	%%rax, %%rdi\n\t"
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi"
+	);
 }
 
 dispatch ">>"
 {
-	binop(b >> a);
+  asm (
+		ASM_POP_TWO
+    "mov  %%rbx, %%rcx\n\t"
+		"sar	%%cl, %%rax\n\t"
+		"mov	%%rax, %%rdi\n\t"
+		ASM_PUSH_RDI
+		: /* no output */
+		: /* no input */
+		: "%rax", "%rbx", "%rdi"
+	);
 }
 
 dispatch "x"
